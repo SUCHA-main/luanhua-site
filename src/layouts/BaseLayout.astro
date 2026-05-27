@@ -1,0 +1,43 @@
+---
+import Navbar from '../components/Navbar.astro';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  navVariant?: 'default' | 'floating';
+  pageClass?: string;
+}
+
+const {
+  title = '乱花',
+  description = '持续记录技术学习、项目实践与个人成长',
+  navVariant = 'default',
+  pageClass = '',
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+  </head>
+  <body class={pageClass}>
+    <div class="site-shell">
+      <Navbar variant={navVariant} />
+
+      <main>
+        <slot />
+      </main>
+
+      <footer class="site-footer">
+        <span>© 2026 乱花</span>
+        <span>Built with Astro</span>
+      </footer>
+    </div>
+  </body>
+</html>

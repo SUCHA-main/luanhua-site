@@ -1,0 +1,28 @@
+---
+const focusItems = [
+  'Web 自动部署与 CI/CD',
+  '本地 AI 工具与前端工程',
+  'ESP32 / MQTT / IoT 小项目',
+  '个人工具与效率系统',
+];
+---
+
+<section class="content-section" id="focus" data-reveal>
+  <div class="section-heading soft-heading" data-reveal>
+    <span>Focus</span>
+    <h2>当前关注</h2>
+    <p>把近期学习和项目实践收束成几个清晰方向，方便持续记录和复盘。</p>
+  </div>
+
+  <div class="focus-card-grid">
+    {
+      focusItems.map((item, index) => (
+        <article class="soft-card focus-card" data-reveal>
+          <span class="card-index">0{index + 1}</span>
+          <h3>{item}</h3>
+          <p>持续整理相关实践、环境配置、过程记录和后续计划。</p>
+        </article>
+      ))
+    }
+  </div>
+</section>

@@ -1,0 +1,47 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "dev",
+      "type": "npm",
+      "script": "dev",
+      "group": "build",
+      "problemMatcher": [],
+      "detail": "启动 Astro 开发服务器",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      },
+      "isBackground": true
+    },
+    {
+      "label": "build",
+      "type": "npm",
+      "script": "build",
+      "group": "build",
+      "problemMatcher": [],
+      "detail": "构建静态站点到 dist/"
+    },
+    {
+      "label": "preview",
+      "type": "npm",
+      "script": "preview",
+      "group": "test",
+      "problemMatcher": [],
+      "detail": "本地预览构建产物",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      },
+      "isBackground": true
+    },
+    {
+      "label": "check",
+      "type": "shell",
+      "command": "npx astro check",
+      "group": "test",
+      "problemMatcher": [],
+      "detail": "Astro 类型和错误检查"
+    }
+  ]
+}

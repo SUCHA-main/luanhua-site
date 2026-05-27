@@ -1,0 +1,32 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const notes = [
+  'Astro 个人网站搭建记录',
+  'Jenkins 自动部署踩坑记录',
+  '本地 AI 工具环境整理',
+  'ESP32 + MQTT 项目计划',
+];
+---
+
+<BaseLayout title="技术笔记 | 乱花" description="乱花的技术笔记列表">
+  <section class="section">
+    <div class="section-head">
+      <h1>技术笔记</h1>
+      <p>这里先放占位列表，之后可以迁移成 Markdown 内容集合，按时间和主题持续更新。</p>
+    </div>
+    <div class="note-list">
+      {
+        notes.map((note) => (
+          <article class="note-row">
+            <div>
+              <h2>{note}</h2>
+              <p>待补充正文、命令记录、配置片段和问题复盘。</p>
+            </div>
+            <span class="note-status">Draft</span>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+</BaseLayout>

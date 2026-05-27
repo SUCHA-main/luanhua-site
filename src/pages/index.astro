@@ -1,0 +1,19 @@
+---
+import FeaturedProjects from '../components/FeaturedProjects.astro';
+import FocusSection from '../components/FocusSection.astro';
+import HomeInteractions from '../components/HomeInteractions.astro';
+import Hero from '../components/Hero.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="乱花"
+  description="持续记录技术学习、项目实践与个人成长"
+  navVariant="floating"
+  pageClass="home-page"
+>
+  <Hero />
+  <FocusSection />
+  <FeaturedProjects />
+  <HomeInteractions />
+</BaseLayout>
