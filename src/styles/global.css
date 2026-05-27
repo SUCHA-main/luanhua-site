@@ -445,6 +445,95 @@ textarea {
   font-size: 13px;
 }
 
+/* Focus Section Styles */
+.focus-section {
+  padding-bottom: 60px;
+}
+
+.focus-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.focus-card {
+  border: 1px solid rgba(255, 255, 255, 0.68);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(16px);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+}
+
+.focus-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(95, 159, 138, 0.32);
+  box-shadow: 0 24px 60px rgba(67, 82, 77, 0.16);
+}
+
+.focus-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.focus-card-index {
+  color: var(--accent-dark);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.focus-card h3 {
+  margin: 0 0 12px;
+  font-size: 20px;
+  line-height: 1.3;
+  letter-spacing: -0.04em;
+}
+
+.focus-card-desc {
+  margin: 0 0 16px;
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--muted);
+}
+
+.focus-card-meta {
+  margin-top: auto;
+  margin-bottom: 12px;
+}
+
+.focus-card-related {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  color: var(--accent-dark);
+  background: rgba(95, 159, 138, 0.12);
+  border: 1px solid rgba(95, 159, 138, 0.2);
+}
+
+.focus-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+}
+
+.focus-tag {
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  color: var(--muted);
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid var(--line);
+}
+
 .soft-card h3,
 .card h2,
 .card h3 {
@@ -1159,6 +1248,10 @@ textarea {
     grid-template-columns: 1fr;
   }
 
+  .focus-grid {
+    grid-template-columns: 1fr;
+  }
+
   .about-grid {
     grid-template-columns: 1fr;
   }
@@ -1365,6 +1458,32 @@ textarea {
 
   .about-next-list li {
     font-size: 14px;
+  }
+
+  .focus-card {
+    padding: 20px;
+  }
+
+  .focus-card h3 {
+    font-size: 18px;
+  }
+
+  .focus-card-desc {
+    font-size: 13px;
+  }
+
+  .focus-card-related {
+    font-size: 11px;
+    padding: 3px 8px;
+  }
+
+  .focus-tags {
+    gap: 6px;
+  }
+
+  .focus-tag {
+    font-size: 11px;
+    padding: 3px 8px;
   }
 
   .note-row {

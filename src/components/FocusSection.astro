@@ -1,26 +1,56 @@
 ---
-const focusItems = [
-  'Web 自动部署与 CI/CD',
-  '本地 AI 工具与前端工程',
-  'ESP32 / MQTT / IoT 小项目',
-  '个人工具与效率系统',
+const focusAreas = [
+  {
+    title: 'AI 应用',
+    desc: '把 AI 能力接进具体流程，而不是只停留在聊天。练习从数据抓取、总结、审核到本地模型接入的完整过程。',
+    tags: ['Ollama', 'AI Provider', 'Summary', 'MVP'],
+    related: 'AI WeChat Digest / LabelHub AI / WebSocket Chatroom',
+  },
+  {
+    title: '全栈开发',
+    desc: '把想法做成可以运行、可以展示、可以继续迭代的服务。练习把页面、接口和数据串起来。',
+    tags: ['React', 'Vite', 'Node.js', 'Astro', 'SQLite'],
+    related: 'LabelHub AI / AI WeChat Digest / luanhua-site',
+  },
+  {
+    title: 'DevOps 实验',
+    desc: '理解代码从提交、构建、部署到监控的过程。用本地实验理解完整流程。',
+    tags: ['Jenkins', 'Docker', 'Harbor', 'Zabbix', 'WSL2'],
+    related: 'CI/CD Lab',
+  },
+  {
+    title: 'AIoT / 物联网',
+    desc: '长期方向，先从低成本、可复刻的小项目开始。下一阶段准备尝试 ESP32 和传感器。',
+    tags: ['ESP32', 'MQTT', 'Sensor', 'Web Dashboard'],
+    related: '准备中的方向',
+  },
 ];
 ---
 
-<section class="content-section" id="focus" data-reveal>
+<section class="content-section focus-section" id="focus" data-reveal>
   <div class="section-heading soft-heading" data-reveal>
     <span>Focus</span>
     <h2>当前关注</h2>
-    <p>把近期学习和项目实践收束成几个清晰方向，方便持续记录和复盘。</p>
+    <p>我会把学习方向拆成可以运行的小项目，再慢慢补上文档、交互和复盘。</p>
   </div>
 
-  <div class="focus-card-grid">
+  <div class="focus-grid">
     {
-      focusItems.map((item, index) => (
-        <article class="soft-card focus-card" data-reveal>
-          <span class="card-index">0{index + 1}</span>
-          <h3>{item}</h3>
-          <p>持续整理相关实践、环境配置、过程记录和后续计划。</p>
+      focusAreas.map((area, index) => (
+        <article class="focus-card" data-reveal>
+          <div class="focus-card-header">
+            <span class="focus-card-index">0{index + 1}</span>
+          </div>
+          <h3>{area.title}</h3>
+          <p class="focus-card-desc">{area.desc}</p>
+          <div class="focus-card-meta">
+            <span class="focus-card-related">关联：{area.related}</span>
+          </div>
+          <div class="focus-tags">
+            {area.tags.map((tag) => (
+              <span class="focus-tag">{tag}</span>
+            ))}
+          </div>
         </article>
       ))
     }
