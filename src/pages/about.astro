@@ -1,37 +1,131 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+
+const focusAreas = [
+  {
+    title: 'AI 应用',
+    desc: '关注 AI 总结、AI 辅助工作流、本地模型接入和小型 MVP 产品。',
+    icon: '🤖',
+  },
+  {
+    title: '全栈开发',
+    desc: '用前端、后端、数据库和部署流程，把想法做成可以运行的页面或服务。',
+    icon: '💻',
+  },
+  {
+    title: 'DevOps 实验',
+    desc: '通过 Jenkins、Gitea、Harbor、Docker、Zabbix 等工具理解代码从提交到部署和监控的过程。',
+    icon: '⚙️',
+  },
+  {
+    title: 'AIoT / 物联网',
+    desc: '长期关注物联网、AIoT 和机器人相关方向，目前先从低成本、可复刻的小项目开始积累。',
+    icon: '🔌',
+  },
+];
+
+const projectHighlights = [
+  {
+    title: 'Go WebSocket Chatroom',
+    desc: '练习 Go 后端、WebSocket 实时通信和本地 AI 助手接入。',
+    link: '/projects#go-websocket-chatroom',
+  },
+  {
+    title: 'AI WeChat Digest MVP',
+    desc: '练习 RSS 抓取、AI 总结、晚报生成和推送出口。',
+    link: '/projects#ai-wechat-digest',
+  },
+  {
+    title: 'LabelHub AI MVP',
+    desc: '练习前后端分离、任务流转和 mock AI 审核。',
+    link: '/projects#labelhub-ai',
+  },
+];
+
+const learningApproach = [
+  {
+    title: '先跑通，再打磨',
+    desc: '先完成最小可运行版本，再逐步补交互、文档、构建和展示。',
+  },
+  {
+    title: '用项目理解工具',
+    desc: '通过真实项目理解框架、部署、监控和 AI 接入，而不是只停留在概念。',
+  },
+  {
+    title: '保留复盘痕迹',
+    desc: '把踩坑、改进和下一步计划整理下来，让项目能持续变好。',
+  },
+];
+
+const nextSteps = [
+  '继续打磨已有项目的文档、演示和部署体验。',
+  '继续补全个人网站的笔记、项目详情和技术路线。',
+  '逐步尝试 AIoT / ESP32 / 传感器 / MQTT / Web 展示类项目。',
+];
 ---
 
-<BaseLayout title="关于我 | 乱花" description="关于乱花个人技术网站">
-  <section class="section">
+<BaseLayout title="关于乱花 | 个人技术成长记录" description="乱花是一个把学习过程做成项目、把技术路线慢慢整理清楚的个人空间">
+  <section class="section about-section">
     <div class="section-head">
-      <h1>关于我</h1>
-      <p>这里用于说明这个个人技术网站的定位，不展示真实姓名、学校、学号等敏感信息。</p>
+      <h1>关于乱花</h1>
+      <p class="about-tagline">一个把学习过程做成项目、把技术路线慢慢整理清楚的个人空间。</p>
     </div>
 
-    <div class="about-panel">
+    <div class="about-intro">
       <p>
-        乱花是一个个人技术记录站，用来整理项目实践、工具配置、部署实验和阶段性的学习过程。
-        网站保持轻量、清晰和可维护，适合后续部署到 Vercel 或 Cloudflare Pages。
+        我正在持续学习全栈开发、AI 应用和 DevOps 基础。比起只看教程，我更希望把知识做成可以运行、可以复盘、可以展示的小项目。
+        这个网站用来记录这些项目和阶段性思考。
       </p>
-      <div class="about-columns">
-        <div class="mini-card">
-          <h2>关注内容</h2>
-          <ul class="plain-list">
-            <li>Web 工程与自动部署</li>
-            <li>本地 AI 工具使用与整理</li>
-            <li>IoT 小项目和个人效率工具</li>
-          </ul>
-        </div>
-        <div class="mini-card">
-          <h2>网站原则</h2>
-          <ul class="plain-list">
-            <li>内容真实可复盘</li>
-            <li>结构简洁易扩展</li>
-            <li>不暴露敏感身份信息</li>
-          </ul>
-        </div>
+    </div>
+
+    <div class="about-focus">
+      <h2 class="about-section-title">当前关注</h2>
+      <div class="about-grid">
+        {focusAreas.map((area) => (
+          <article class="about-card">
+            <span class="about-card-icon">{area.icon}</span>
+            <h3>{area.title}</h3>
+            <p>{area.desc}</p>
+          </article>
+        ))}
       </div>
+    </div>
+
+    <div class="about-projects">
+      <h2 class="about-section-title">做过哪些项目</h2>
+      <p class="about-section-desc">
+        这些项目记录了我的技术实践，从 AI 应用到全栈开发，从 DevOps 实验到本地工具优化。
+      </p>
+      <div class="about-project-list">
+        {projectHighlights.map((project) => (
+          <a href={project.link} class="about-project-item">
+            <h3>{project.title}</h3>
+            <p>{project.desc}</p>
+          </a>
+        ))}
+      </div>
+      <a href="/projects" class="about-cta">查看全部项目 →</a>
+    </div>
+
+    <div class="about-learning">
+      <h2 class="about-section-title">我的学习方式</h2>
+      <div class="about-grid">
+        {learningApproach.map((item) => (
+          <article class="about-card">
+            <h3>{item.title}</h3>
+            <p>{item.desc}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+
+    <div class="about-next">
+      <h2 class="about-section-title">下一阶段方向</h2>
+      <ul class="about-next-list">
+        {nextSteps.map((step) => (
+          <li>{step}</li>
+        ))}
+      </ul>
     </div>
   </section>
 </BaseLayout>
