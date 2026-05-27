@@ -17,6 +17,19 @@
 | 笔记页 | 整理项目复盘、AI 应用笔记、DevOps 实验记录、AIoT / 物联网准备 |
 | 关于页 | 介绍当前学习方向、项目经历、学习方式和下一阶段计划 |
 
+## 在线访问
+
+当前网站已部署到 Vercel：
+
+https://luanhua-site.vercel.app/
+
+主要页面：
+
+- 首页：https://luanhua-site.vercel.app/
+- 项目作品：https://luanhua-site.vercel.app/projects
+- 技术笔记：https://luanhua-site.vercel.app/notes
+- 关于页面：https://luanhua-site.vercel.app/about
+
 ## 技术栈
 
 - **框架**：Astro 5
@@ -81,6 +94,7 @@ public/
 - ✅ 已完成本地构建验证
 - ✅ 已添加基础响应式适配
 - ✅ 已添加项目 GitHub 链接（Go WebSocket Chatroom、LabelHub AI MVP、Fooocus）
+- ✅ 已部署到 Vercel：https://luanhua-site.vercel.app/
 - ⚠️ Notes 内容仍以待整理入口为主
 - ⚠️ 后续会继续补充项目详情和真实笔记内容
 
@@ -88,11 +102,12 @@ public/
 
 - 补充项目详情内容
 - 增加真实技术笔记
-- 做部署与线上访问
 - 补充截图
 - 继续优化移动端体验
 
 ## 部署
+
+当前已部署到 Vercel：https://luanhua-site.vercel.app/
 
 ### Vercel
 
