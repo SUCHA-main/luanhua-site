@@ -30,6 +30,28 @@ https://luanhua-site.vercel.app/
 - 技术笔记：https://luanhua-site.vercel.app/notes
 - 关于页面：https://luanhua-site.vercel.app/about
 
+## 页面预览
+
+### 首页
+
+![首页截图](docs/images/home.png)
+
+### 项目页
+
+![项目页截图](docs/images/projects.png)
+
+### 技术笔记
+
+![技术笔记截图](docs/images/notes.png)
+
+### 关于页面
+
+![关于页面截图](docs/images/about.png)
+
+### 移动端首页
+
+![移动端首页截图](docs/images/mobile-home.png)
+
 ## 技术栈
 
 - **框架**：Astro 5
