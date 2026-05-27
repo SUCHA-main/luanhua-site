@@ -1,13 +1,29 @@
-# 乱花
+# 乱花 luanhua-site
 
-一个使用 Astro 构建的个人技术网站，用于展示项目、技术笔记和学习过程。
+一个用 Astro 构建的个人网站，用来整理技术项目、学习笔记和阶段性成长记录。
 
-## 页面结构
+## 项目简介
 
-- `/` 首页
-- `/projects` 项目作品
-- `/notes` 技术笔记
-- `/about` 关于我
+这是乱花的个人网站项目，用来展示当前关注方向、技术项目、学习笔记和阶段性复盘。
+
+网站不是成熟商业官网，而是一个持续迭代的个人作品集入口。
+
+## 当前页面
+
+| 页面 | 说明 |
+|------|------|
+| 首页 | Hero 区、当前关注方向、精选项目展示 |
+| 项目页 | 展示 Go WebSocket Chatroom、AI WeChat Digest MVP、LabelHub AI MVP、CI/CD Lab、Fooocus 中文本地 UI 补丁、luanhua-site |
+| 笔记页 | 整理项目复盘、AI 应用笔记、DevOps 实验记录、AIoT / 物联网准备 |
+| 关于页 | 介绍当前学习方向、项目经历、学习方式和下一阶段计划 |
+
+## 技术栈
+
+- **框架**：Astro 5
+- **语言**：TypeScript
+- **样式**：原生 CSS
+- **输出**：静态站点
+- **布局**：响应式设计
 
 ## 本地运行
 
@@ -45,7 +61,7 @@ npm run preview
 npx astro check
 ```
 
-### 项目结构
+## 项目结构
 
 ```text
 src/
@@ -58,6 +74,23 @@ public/
 ```
 
 构建产物输出到 `dist/`，部署时使用该目录。
+
+## 当前状态
+
+- ✅ 已完成首页、项目页、笔记页、关于页基础优化
+- ✅ 已完成本地构建验证
+- ✅ 已添加基础响应式适配
+- ✅ 已添加项目 GitHub 链接（Go WebSocket Chatroom、LabelHub AI MVP、Fooocus）
+- ⚠️ Notes 内容仍以待整理入口为主
+- ⚠️ 后续会继续补充项目详情和真实笔记内容
+
+## 后续计划
+
+- 补充项目详情内容
+- 增加真实技术笔记
+- 做部署与线上访问
+- 补充截图
+- 继续优化移动端体验
 
 ## 部署
 
@@ -77,8 +110,14 @@ public/
 4. Build command 使用 `npm run build`。
 5. Build output directory 使用 `dist`。
 
-## 后续扩展
+### GitHub Pages
 
-- 将技术笔记迁移为 Markdown 内容集合。
-- 为项目卡片补充 GitHub 链接和部署地址。
-- 添加 RSS、站点地图和基础 SEO 信息。
+1. 将项目推送到 GitHub。
+2. 在仓库 Settings > Pages 中配置。
+3. Source 选择 `Deploy from a branch`。
+4. Branch 选择 `main`，文件夹选择 `/ (root)`。
+5. 保存后等待部署完成。
+
+## 隐私说明
+
+本仓库不包含 API Key、Token、.env、本地服务账号或敏感环境配置。
