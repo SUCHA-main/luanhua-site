@@ -4,6 +4,8 @@
   const floatingNav = document.querySelector('.site-header.floating');
   const revealItems = document.querySelectorAll('[data-reveal]');
   const scrollHint = document.querySelector('.scroll-hint');
+  const labHero = document.querySelector<HTMLElement>('.personal-lab-hero');
+  const parallaxLayers = document.querySelectorAll<HTMLElement>('[data-depth]');
 
   body.classList.add('motion-ready');
 
@@ -40,4 +42,47 @@
     event.preventDefault();
     target.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth', block: 'start' });
   });
+
+  if (!prefersReducedMotion && labHero && parallaxLayers.length > 0 && window.matchMedia('(pointer: fine)').matches) {
+    let targetX = 0;
+    let targetY = 0;
+    let currentX = 0;
+    let currentY = 0;
+    let frameRequested = false;
+
+    function updateLayers() {
+      currentX += (targetX - currentX) * 0.08;
+      currentY += (targetY - currentY) * 0.08;
+
+      parallaxLayers.forEach((layer) => {
+        const depth = Number(layer.getAttribute('data-depth') || 0);
+        const x = currentX * depth;
+        const y = currentY * depth;
+        const rotate = currentX * depth * 0.012;
+        layer.style.transform = `translate3d(${x}px, ${y}px, 0) rotate(${rotate}deg)`;
+      });
+
+      frameRequested = Math.abs(targetX - currentX) > 0.001 || Math.abs(targetY - currentY) > 0.001;
+      if (frameRequested) requestAnimationFrame(updateLayers);
+    }
+
+    function requestLayerUpdate() {
+      if (frameRequested) return;
+      frameRequested = true;
+      requestAnimationFrame(updateLayers);
+    }
+
+    labHero.addEventListener('pointermove', (event: PointerEvent) => {
+      const rect = labHero.getBoundingClientRect();
+      targetX = (event.clientX - rect.left) / rect.width - 0.5;
+      targetY = (event.clientY - rect.top) / rect.height - 0.5;
+      requestLayerUpdate();
+    });
+
+    labHero.addEventListener('pointerleave', () => {
+      targetX = 0;
+      targetY = 0;
+      requestLayerUpdate();
+    });
+  }
 </script>

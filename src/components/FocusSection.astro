@@ -2,27 +2,35 @@
 const focusAreas = [
   {
     title: 'AI 应用',
+    label: '01 / AI',
     desc: '把 AI 能力接进具体流程，而不是只停留在聊天。练习从数据抓取、总结、审核到本地模型接入的完整过程。',
     tags: ['Ollama', 'AI Provider', 'Summary', 'MVP'],
     related: 'AI WeChat Digest / LabelHub AI / WebSocket Chatroom',
+    glow: 'var(--lab-accent)',
   },
   {
     title: '全栈开发',
+    label: '02 / Web',
     desc: '把想法做成可以运行、可以展示、可以继续迭代的服务。练习把页面、接口和数据串起来。',
     tags: ['React', 'Vite', 'Node.js', 'Astro', 'SQLite'],
     related: 'LabelHub AI / AI WeChat Digest / luanhua-site',
+    glow: 'var(--lab-cyan)',
   },
   {
     title: 'DevOps 实验',
+    label: '03 / Ops',
     desc: '理解代码从提交、构建、部署到监控的过程。用本地实验理解完整流程。',
     tags: ['Jenkins', 'Docker', 'Harbor', 'Zabbix', 'WSL2'],
     related: 'CI/CD Lab',
+    glow: 'var(--lab-pink)',
   },
   {
     title: 'AIoT / 物联网',
+    label: '04 / Device',
     desc: '长期方向，先从低成本、可复刻的小项目开始。下一阶段准备尝试 ESP32 和传感器。',
     tags: ['ESP32', 'MQTT', 'Sensor', 'Web Dashboard'],
     related: '准备中的方向',
+    glow: 'var(--lab-amber)',
   },
 ];
 ---
@@ -37,9 +45,10 @@ const focusAreas = [
   <div class="focus-grid">
     {
       focusAreas.map((area, index) => (
-        <article class="focus-card" data-reveal>
+        <article class="focus-card" style={`--focus-glow: ${area.glow}`} data-reveal>
           <div class="focus-card-header">
-            <span class="focus-card-index">0{index + 1}</span>
+            <span class="focus-card-index">{area.label}</span>
+            <span class="focus-card-status">Lab {index + 1}</span>
           </div>
           <h3>{area.title}</h3>
           <p class="focus-card-desc">{area.desc}</p>
@@ -54,5 +63,17 @@ const focusAreas = [
         </article>
       ))
     }
+  </div>
+
+  <div class="lab-contact-strip" data-reveal>
+    <div>
+      <span>Next</span>
+      <h2>继续把实验变成作品</h2>
+      <p>后续会补充项目细节、真实笔记和更多可复现的部署记录。</p>
+    </div>
+    <div class="lab-contact-actions">
+      <a href="/projects" class="hero-btn primary">看项目</a>
+      <a href="/about" class="hero-btn">当前阶段</a>
+    </div>
   </div>
 </section>
