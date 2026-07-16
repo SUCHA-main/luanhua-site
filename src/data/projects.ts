@@ -5,6 +5,11 @@ export interface ProjectImage {
   height: number;
 }
 
+export interface ProjectNote {
+  title: string;
+  href: string;
+}
+
 export interface PortfolioProject {
   id: string;
   title: string;
@@ -19,6 +24,7 @@ export interface PortfolioProject {
   github?: string;
   demo?: string;
   image?: ProjectImage;
+  notes?: ProjectNote[];
   featured: boolean;
   order: number;
   limitations: string[];
@@ -44,6 +50,12 @@ export const projects: PortfolioProject[] = [
       width: 1440,
       height: 1100,
     },
+    notes: [
+      {
+        title: 'AI WeChat Digest MVP：从 RSS 到每日晚报',
+        href: '/notes/ai-wechat-digest-rss-to-daily-digest',
+      },
+    ],
     featured: true,
     order: 1,
     limitations: ['默认 AI 模式为 Mock', '未实现微信公众号抓取或公众号发布', '真实配置和运行数据库仅保留在本地'],
@@ -67,6 +79,12 @@ export const projects: PortfolioProject[] = [
       width: 1366,
       height: 768,
     },
+    notes: [
+      {
+        title: 'Mini Provider Gateway：密钥、日志与安全边界',
+        href: '/notes/mini-provider-gateway-credentials-logs-security-boundaries',
+      },
+    ],
     featured: true,
     order: 2,
     limitations: ['Provider Key 当前在本地 SQLite 中明文存储', '仅支持基础非流式接口子集', '不包含生产级认证、限流、计费或高可用'],

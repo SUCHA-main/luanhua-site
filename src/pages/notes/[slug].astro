@@ -5,19 +5,27 @@ import { orderedProjects } from '../../data/projects';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 export async function getStaticPaths() {
-  const notes = await getCollection('notes', ({ data }) => !data.draft);
+  const notes = (await getCollection('notes', ({ data }) => !data.draft)).sort(
+    (a, b) => a.data.publishedAt.valueOf() - b.data.publishedAt.valueOf(),
+  );
 
-  return notes.map((note) => ({
+  return notes.map((note, index) => ({
     params: { slug: note.id },
-    props: { note },
+    props: {
+      note,
+      previousNote: notes[index - 1],
+      nextNote: notes[index + 1],
+    },
   }));
 }
 
 interface Props {
   note: CollectionEntry<'notes'>;
+  previousNote?: CollectionEntry<'notes'>;
+  nextNote?: CollectionEntry<'notes'>;
 }
 
-const { note } = Astro.props;
+const { note, previousNote, nextNote } = Astro.props;
 const { Content } = await render(note);
 const project = orderedProjects.find((item) => item.id === note.data.projectId);
 const publishedAt = note.data.publishedAt.toISOString();
@@ -59,6 +67,31 @@ const displayDate = new Intl.DateTimeFormat('zh-CN', {
     <div class="note-article-prose">
       <Content />
     </div>
+
+    {
+      (previousNote || nextNote) && (
+        <nav class="note-article-navigation" aria-label="文章上一篇和下一篇">
+          <div class="note-navigation-heading">
+            <span>Continue Reading</span>
+            <h2>继续阅读</h2>
+          </div>
+          <div class="note-navigation-grid">
+            {previousNote && (
+              <a href={`/notes/${previousNote.id}`} class="note-navigation-link previous">
+                <span>← 上一篇</span>
+                <strong>{previousNote.data.title}</strong>
+              </a>
+            )}
+            {nextNote && (
+              <a href={`/notes/${nextNote.id}`} class="note-navigation-link next">
+                <span>下一篇 →</span>
+                <strong>{nextNote.data.title}</strong>
+              </a>
+            )}
+          </div>
+        </nav>
+      )
+    }
 
     <footer class="note-article-footer">
       <div>

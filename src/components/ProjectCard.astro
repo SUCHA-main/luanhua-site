@@ -71,6 +71,18 @@ const isFeatured = variant === 'featured';
       </a>
     )}
     {
+      !isFeatured &&
+        project.notes?.map((note) => (
+          <a
+            href={note.href}
+            class="project-action-btn primary"
+            aria-label={`阅读项目复盘：${note.title}`}
+          >
+            阅读复盘
+          </a>
+        ))
+    }
+    {
       project.demo && (
         <a href={project.demo} class={isFeatured ? 'project-link' : 'project-action-btn primary'}>
           {project.demo === '/' ? '当前网站' : '在线演示'}
