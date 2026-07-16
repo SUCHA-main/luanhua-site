@@ -1,4 +1,5 @@
 ---
+import { siteConfig } from '../config/site';
 import { representativeProjects } from '../data/projects';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
@@ -48,7 +49,7 @@ const nextSteps = [
 ---
 
 <BaseLayout
-  title="关于乱花 | 个人技术成长记录"
+  title={`关于乱花 | ${siteConfig.siteName}`}
   description="了解乱花当前关注的 AI 应用、全栈开发、DevOps 实验，以及从真实项目中持续学习和复盘的方式。"
 >
   <section class="section about-section">

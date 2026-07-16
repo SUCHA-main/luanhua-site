@@ -1,11 +1,12 @@
 ---
 import ProjectCard from '../components/ProjectCard.astro';
+import { siteConfig } from '../config/site';
 import { featuredProjects, otherProjects } from '../data/projects';
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
 <BaseLayout
-  title="项目作品 | 乱花 Personal Lab"
+  title={`项目作品 | ${siteConfig.siteName}`}
   description="查看乱花的重点公开项目与其他技术实践，涵盖 AI 摘要、Provider Gateway、Go WebSocket、全栈 MVP、手势识别与 DevOps。"
 >
   <section class="section projects-section">

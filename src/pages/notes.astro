@@ -1,5 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
+import { siteConfig } from '../config/site';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 const notes = (await getCollection('notes', ({ data }) => !data.draft)).sort(
@@ -31,7 +32,7 @@ const principles = [
 ---
 
 <BaseLayout
-  title="技术笔记 | 乱花 Personal Lab"
+  title={`技术笔记 | ${siteConfig.siteName}`}
   description="乱花的真实项目复盘与技术笔记，记录实现路径、安全边界、验证结果和下一步计划。"
 >
   <section class="section notes-section">

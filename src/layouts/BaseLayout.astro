@@ -1,5 +1,6 @@
 ---
 import Navbar from '../components/Navbar.astro';
+import { siteConfig } from '../config/site';
 import '../styles/global.css';
 
 interface Props {
@@ -9,18 +10,75 @@ interface Props {
   pageClass?: string;
   ogType?: 'website' | 'article';
   publishedTime?: string;
+  updatedTime?: string;
   tags?: string[];
+  articleImage?: string;
+  articleTitle?: string;
 }
 
 const {
-  title = '乱花 | AI 应用、全栈与 DevOps 项目',
-  description = '乱花的个人技术作品集，记录 AI 应用、全栈开发、实时通信与 DevOps 实验。',
+  title = `${siteConfig.siteName} | AI 应用、全栈与 DevOps 项目`,
+  description = siteConfig.description,
   navVariant = 'default',
   pageClass = '',
   ogType = 'website',
   publishedTime,
+  updatedTime,
   tags = [],
+  articleImage,
+  articleTitle,
 } = Astro.props;
+
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site ?? siteConfig.siteUrl).toString();
+const articleImageUrl = articleImage ? new URL(articleImage, siteConfig.siteUrl).toString() : undefined;
+
+const personNode = {
+  '@type': 'Person',
+  '@id': `${siteConfig.siteUrl}/#person`,
+  name: siteConfig.authorName,
+  url: siteConfig.siteUrl,
+  sameAs: [siteConfig.githubUrl],
+};
+
+const websiteNode = {
+  '@type': 'WebSite',
+  '@id': `${siteConfig.siteUrl}/#website`,
+  name: siteConfig.siteName,
+  url: siteConfig.siteUrl,
+  description: siteConfig.description,
+  inLanguage: 'zh-CN',
+  author: {
+    '@id': personNode['@id'],
+  },
+};
+
+const articleNode =
+  ogType === 'article' && publishedTime
+    ? {
+        '@type': 'BlogPosting',
+        '@id': `${canonicalUrl}#article`,
+        headline: articleTitle ?? title,
+        description,
+        url: canonicalUrl,
+        mainEntityOfPage: canonicalUrl,
+        datePublished: publishedTime,
+        ...(updatedTime ? { dateModified: updatedTime } : {}),
+        ...(articleImageUrl ? { image: articleImageUrl } : {}),
+        inLanguage: 'zh-CN',
+        keywords: tags,
+        author: {
+          '@id': personNode['@id'],
+        },
+        isPartOf: {
+          '@id': websiteNode['@id'],
+        },
+      }
+    : undefined;
+
+const structuredData = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@graph': [websiteNode, personNode, ...(articleNode ? [articleNode] : [])],
+}).replace(/</g, '\\u003c');
 ---
 
 <!doctype html>
@@ -33,15 +91,27 @@ const {
     <meta name="theme-color" content="#050507" />
     <meta property="og:type" content={ogType} />
     <meta property="og:locale" content="zh_CN" />
-    <meta property="og:site_name" content="乱花 Personal Lab" />
+    <meta property="og:site_name" content={siteConfig.siteName} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    {articleImageUrl && <meta property="og:image" content={articleImageUrl} />}
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     {publishedTime && <meta property="article:published_time" content={publishedTime} />}
+    {updatedTime && <meta property="article:modified_time" content={updatedTime} />}
     {tags.map((tag) => <meta property="article:tag" content={tag} />)}
+    <link rel="canonical" href={canonicalUrl} />
+    <link rel="sitemap" href={siteConfig.sitemapUrl} />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title={`${siteConfig.siteName} 技术笔记`}
+      href={siteConfig.rssUrl}
+    />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <script type="application/ld+json" set:html={structuredData} is:inline />
     <title>{title}</title>
   </head>
   <body class={pageClass}>
@@ -54,15 +124,19 @@ const {
       </main>
 
       <footer class="site-footer">
-        <span>© 2026 乱花</span>
-        <a
-          href="https://github.com/SUCHA-main/luanhua-site"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="luanhua-site GitHub 仓库（新窗口打开）"
-        >
-          Built with Astro · GitHub ↗
-        </a>
+        <span>© 2026 {siteConfig.authorName}</span>
+        <div class="site-footer-links">
+          <a href={siteConfig.rssUrl}>RSS</a>
+          <span aria-hidden="true">·</span>
+          <a
+            href={siteConfig.repositoryUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="luanhua-site GitHub 仓库（新窗口打开）"
+          >
+            Built with Astro · GitHub ↗
+          </a>
+        </div>
       </footer>
     </div>
   </body>

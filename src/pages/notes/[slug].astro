@@ -1,6 +1,7 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import { getCollection, render } from 'astro:content';
+import { siteConfig } from '../../config/site';
 import { orderedProjects } from '../../data/projects';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
@@ -37,12 +38,15 @@ const displayDate = new Intl.DateTimeFormat('zh-CN', {
 ---
 
 <BaseLayout
-  title={`${note.data.title} | 乱花技术笔记`}
+  title={`${note.data.title} | ${siteConfig.authorName}技术笔记`}
   description={note.data.description}
   pageClass="note-article-page"
   ogType="article"
   publishedTime={publishedAt}
+  updatedTime={note.data.updatedAt?.toISOString()}
   tags={note.data.tags}
+  articleImage={note.data.cover}
+  articleTitle={note.data.title}
 >
   <article class="note-article-shell">
     <nav class="note-breadcrumb" aria-label="文章路径">

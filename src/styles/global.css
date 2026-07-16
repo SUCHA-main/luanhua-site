@@ -1384,6 +1384,12 @@ textarea {
   font-size: 14px;
 }
 
+.site-footer-links {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
 .motion-ready [data-reveal] {
   opacity: 0;
   transform: translate3d(0, 18px, 0);
@@ -1948,6 +1954,10 @@ textarea {
   .site-footer {
     align-items: flex-start;
     flex-direction: column;
+  }
+
+  .site-footer-links {
+    flex-wrap: wrap;
   }
 
   .focus-card-grid,
