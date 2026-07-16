@@ -129,6 +129,12 @@ export const projects: PortfolioProject[] = [
       width: 2020,
       height: 1755,
     },
+    notes: [
+      {
+        title: 'LabelHub AI：为什么先做 Mock AI，而不是急着接大模型',
+        href: '/notes/labelhub-ai-why-mock-ai-before-real-llm',
+      },
+    ],
     featured: true,
     order: 4,
     limitations: ['AI Review 是规则驱动 Mock', 'Demo 登录不是真实认证', 'JSON 文件持久化只适合本地演示'],
