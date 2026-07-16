@@ -1,4 +1,10 @@
-<section class="immersive-hero personal-lab-hero" id="top">
+---
+import { featuredProjects } from '../data/projects';
+
+const currentBuilds = featuredProjects.slice(0, 2);
+---
+
+<section class="immersive-hero personal-lab-hero" id="top" aria-labelledby="home-title">
   <div class="hero-overlay"></div>
 
   <div class="hero-lab-grid">
@@ -7,7 +13,7 @@
         <span class="hero-signal" aria-hidden="true"></span>
         技术成长记录 & 作品展示
       </p>
-      <h1>
+      <h1 id="home-title">
         乱花
         <span>Personal Lab</span>
       </h1>
@@ -38,14 +44,14 @@
           <span class="lab-display-node"></span>
         </div>
         <div class="lab-panel-bottom">
-          <div>
-            <strong>AI Digest</strong>
-            <span>RSS, summary, push</span>
-          </div>
-          <div>
-            <strong>Gateway</strong>
-            <span>Provider, key, logs</span>
-          </div>
+          {
+            currentBuilds.map((project) => (
+              <div>
+                <strong>{project.shortTitle ?? project.title}</strong>
+                <span>{project.heroSummary ?? project.highlights[0]}</span>
+              </div>
+            ))
+          }
         </div>
       </div>
 
@@ -58,6 +64,6 @@
 
   <a class="scroll-hint" href="#focus" aria-label="向下探索">
     <span>向下探索</span>
-    <span class="scroll-arrow">↓</span>
+    <span class="scroll-arrow" aria-hidden="true">↓</span>
   </a>
 </section>

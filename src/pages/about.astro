@@ -1,4 +1,5 @@
 ---
+import { representativeProjects } from '../data/projects';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 const focusAreas = [
@@ -24,24 +25,6 @@ const focusAreas = [
   },
 ];
 
-const projectHighlights = [
-  {
-    title: 'Go WebSocket Chatroom',
-    desc: '练习 Go 后端、WebSocket 实时通信和本地 AI 助手接入。',
-    link: '/projects#go-websocket-chatroom',
-  },
-  {
-    title: 'AI WeChat Digest MVP',
-    desc: '练习 RSS 抓取、AI 总结、晚报生成和推送出口。',
-    link: '/projects#ai-wechat-digest',
-  },
-  {
-    title: 'LabelHub AI MVP',
-    desc: '练习前后端分离、任务流转和 mock AI 审核。',
-    link: '/projects#labelhub-ai',
-  },
-];
-
 const learningApproach = [
   {
     title: '先跑通，再打磨',
@@ -64,7 +47,10 @@ const nextSteps = [
 ];
 ---
 
-<BaseLayout title="关于乱花 | 个人技术成长记录" description="乱花是一个把学习过程做成项目、把技术路线慢慢整理清楚的个人空间">
+<BaseLayout
+  title="关于乱花 | 个人技术成长记录"
+  description="了解乱花当前关注的 AI 应用、全栈开发、DevOps 实验，以及从真实项目中持续学习和复盘的方式。"
+>
   <section class="section about-section">
     <div class="section-head">
       <h1>关于乱花</h1>
@@ -97,10 +83,10 @@ const nextSteps = [
         这些项目记录了我的技术实践，从 AI 应用到全栈开发，从 DevOps 实验到本地工具优化。
       </p>
       <div class="about-project-list">
-        {projectHighlights.map((project) => (
-          <a href={project.link} class="about-project-item">
+        {representativeProjects.map((project) => (
+          <a href={`/projects#${project.id}`} class="about-project-item">
             <h3>{project.title}</h3>
-            <p>{project.desc}</p>
+            <p>{project.subtitle}</p>
           </a>
         ))}
       </div>

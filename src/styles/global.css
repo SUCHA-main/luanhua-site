@@ -106,7 +106,7 @@ textarea {
   flex: 0 0 auto;
   font-size: 18px;
   font-weight: 800;
-  letter-spacing: -0.03em;
+  letter-spacing: 0;
 }
 
 .brand-mark {
@@ -279,7 +279,7 @@ textarea {
   margin: 0;
   font-size: clamp(76px, 15vw, 168px);
   line-height: 0.92;
-  letter-spacing: -0.12em;
+  letter-spacing: 0;
   animation: fade-up-title 820ms ease both 380ms;
 }
 
@@ -423,7 +423,7 @@ textarea {
   margin: 0;
   font-size: clamp(34px, 5vw, 56px);
   line-height: 1.08;
-  letter-spacing: -0.06em;
+  letter-spacing: 0;
 }
 
 .section-heading p,
@@ -534,7 +534,7 @@ textarea {
   margin: 0 0 12px;
   font-size: 20px;
   line-height: 1.3;
-  letter-spacing: -0.04em;
+  letter-spacing: 0;
 }
 
 .focus-card-desc {
@@ -582,7 +582,7 @@ textarea {
   margin: 22px 0 10px;
   font-size: 23px;
   line-height: 1.28;
-  letter-spacing: -0.04em;
+  letter-spacing: 0;
 }
 
 .soft-card p,
@@ -637,7 +637,7 @@ textarea {
   margin: 0 0 8px;
   font-size: 22px;
   line-height: 1.3;
-  letter-spacing: -0.04em;
+  letter-spacing: 0;
 }
 
 .project-subtitle {
@@ -758,7 +758,7 @@ textarea {
   margin: 0 0 10px;
   font-size: 24px;
   line-height: 1.3;
-  letter-spacing: -0.04em;
+  letter-spacing: 0;
 }
 
 .project-detail-subtitle {
@@ -914,7 +914,7 @@ textarea {
 .note-row h2 {
   margin: 0 0 4px;
   font-size: 19px;
-  letter-spacing: -0.02em;
+  letter-spacing: 0;
 }
 
 .note-status {
@@ -984,7 +984,7 @@ textarea {
 .about-section-title {
   margin: 0 0 20px;
   font-size: 24px;
-  letter-spacing: -0.04em;
+  letter-spacing: 0;
   color: var(--text);
 }
 
@@ -1026,7 +1026,7 @@ textarea {
 .about-card h3 {
   margin: 0 0 10px;
   font-size: 18px;
-  letter-spacing: -0.02em;
+  letter-spacing: 0;
 }
 
 .about-card p {
@@ -1064,7 +1064,7 @@ textarea {
 .about-project-item h3 {
   margin: 0 0 6px;
   font-size: 17px;
-  letter-spacing: -0.02em;
+  letter-spacing: 0;
   color: var(--accent-dark);
 }
 
@@ -1160,7 +1160,7 @@ textarea {
 .notes-section-title {
   margin: 0 0 20px;
   font-size: 24px;
-  letter-spacing: -0.04em;
+  letter-spacing: 0;
   color: var(--text);
 }
 
@@ -1189,7 +1189,7 @@ textarea {
 .note-category-card h3 {
   margin: 0 0 12px;
   font-size: 18px;
-  letter-spacing: -0.02em;
+  letter-spacing: 0;
 }
 
 .note-category-desc {
@@ -1276,7 +1276,7 @@ textarea {
 .note-item h3 {
   margin: 0 0 8px;
   font-size: 17px;
-  letter-spacing: -0.02em;
+  letter-spacing: 0;
 }
 
 .note-item p {
@@ -1305,7 +1305,7 @@ textarea {
 .note-principle-card h3 {
   margin: 0 0 10px;
   font-size: 18px;
-  letter-spacing: -0.02em;
+  letter-spacing: 0;
 }
 
 .note-principle-card p {
@@ -1328,7 +1328,7 @@ textarea {
 .notes-cta h2 {
   margin: 0 0 10px;
   font-size: 22px;
-  letter-spacing: -0.04em;
+  letter-spacing: 0;
 }
 
 .notes-cta p {
@@ -2341,5 +2341,179 @@ textarea {
   .note-row {
     align-items: flex-start;
     flex-direction: column;
+  }
+}
+
+/* Portfolio data refresh */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid rgba(47, 111, 97, 0.48);
+  outline-offset: 3px;
+}
+
+.skip-link {
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  z-index: 100;
+  padding: 10px 14px;
+  border-radius: 8px;
+  color: #081007;
+  background: var(--lab-accent);
+  font-weight: 800;
+  transform: translateY(-180%);
+  transition: transform 160ms ease;
+}
+
+.skip-link:focus-visible {
+  transform: translateY(0);
+}
+
+.featured-section .project-card-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.featured-projects-footer {
+  display: flex;
+  justify-content: center;
+  margin-top: 22px;
+}
+
+.project-card-media {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  margin-bottom: 18px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.54);
+}
+
+.project-card-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+}
+
+.project-group {
+  margin-top: 38px;
+}
+
+.project-group + .project-group {
+  margin-top: 68px;
+}
+
+.project-group-heading {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 440px);
+  align-items: end;
+  gap: 24px;
+  margin-bottom: 22px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--line);
+}
+
+.project-group-heading span {
+  color: var(--accent-dark);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.project-group-heading h2 {
+  margin: 5px 0 0;
+  font-size: 30px;
+  line-height: 1.2;
+  letter-spacing: 0;
+}
+
+.project-group-heading p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.secondary-projects-grid {
+  gap: 16px;
+}
+
+.secondary-projects-grid .project-detail-card {
+  background: rgba(255, 255, 255, 0.58);
+  box-shadow: 0 18px 44px rgba(67, 82, 77, 0.1);
+}
+
+.project-detail-card h3 {
+  margin: 0 0 10px;
+  font-size: 24px;
+  line-height: 1.3;
+  letter-spacing: 0;
+}
+
+.project-limitations {
+  margin: 0 0 18px;
+  padding: 16px;
+  border-left: 3px solid rgba(255, 209, 102, 0.9);
+  border-radius: 8px;
+  background: rgba(255, 209, 102, 0.1);
+}
+
+.project-limitations h4 {
+  margin: 0 0 12px;
+  color: #7b5812;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.project-limitations ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.project-limitations li {
+  position: relative;
+  margin-bottom: 8px;
+  padding-left: 18px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.project-limitations li:last-child {
+  margin-bottom: 0;
+}
+
+.project-limitations li::before {
+  position: absolute;
+  top: 8px;
+  left: 0;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #a87814;
+  content: '';
+}
+
+@media (max-width: 900px) {
+  .project-group-heading {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+}
+
+@media (max-width: 560px) {
+  .featured-section .project-card-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .project-card-media {
+    margin-bottom: 16px;
+    border-radius: 12px;
   }
 }

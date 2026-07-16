@@ -1,128 +1,43 @@
 ---
+import ProjectCard from '../components/ProjectCard.astro';
+import { featuredProjects, otherProjects } from '../data/projects';
 import BaseLayout from '../layouts/BaseLayout.astro';
-
-const projects = [
-  {
-    id: 'go-websocket-chatroom',
-    type: 'Go 后端 / 实时通信',
-    title: 'Go WebSocket Chatroom',
-    subtitle: '用 Go 搭建的实时聊天室，练习 WebSocket、登录状态和本地 AI 助手接入',
-    description: '这是一个偏后端实践的聊天项目，围绕注册登录、会话状态、消息广播、在线人数、历史消息和轻量聊天体验展开，并尝试接入本地 Ollama AI 助手。',
-    highlights: ['WebSocket 实时通信', '登录会话与消息广播', '本地 Ollama AI 助手'],
-    tags: ['Go', 'WebSocket', 'Ollama', 'HTML', 'CSS', 'JavaScript'],
-    status: 'Open Source',
-    link: null,
-    github: 'https://github.com/SUCHA-main/go-websocket-chatroom',
-  },
-  {
-    id: 'ai-wechat-digest',
-    type: 'AI 应用 / 信息整理',
-    title: 'AI WeChat Digest MVP',
-    subtitle: '把 RSS 抓取、AI 总结、晚报生成和推送出口串起来的信息整理 MVP',
-    description: '这个项目用于练习 AI 应用从数据源到结果输出的完整流程：抓取文章、去重入库、调用 AI/Mock 总结、按偏好判断重要性，并生成每日晚报。',
-    highlights: ['RSS 数据源管理', 'AI / Mock 总结流程', '每日晚报与推送框架'],
-    tags: ['Node.js', 'Express', 'SQLite', 'RSS', 'AI Provider', 'Ollama'],
-    status: 'MVP',
-    link: null,
-    github: null,
-  },
-  {
-    id: 'labelhub-ai',
-    type: '全栈 MVP / AI 辅助标注',
-    title: 'LabelHub AI MVP',
-    subtitle: '一个 AI 辅助数据标注平台 MVP，用来练习前后端分离和任务流转',
-    description: '这个项目围绕标注任务、动态表单、模拟 AI 审核和演示型工作流展开，重点不是做成完整平台，而是展示 AI + 全栈产品原型的搭建能力。',
-    highlights: ['前后端分离', 'Mock AI Review', 'Docker 演示支持'],
-    tags: ['React', 'Vite', 'Node.js', 'Express', 'Docker', 'AI'],
-    status: 'Demo Ready',
-    link: null,
-    github: 'https://github.com/SUCHA-main/labelhub-ai-mvp',
-  },
-  {
-    id: 'cicd-lab',
-    type: 'DevOps 实验 / 本地环境',
-    title: 'CI/CD Lab',
-    subtitle: '用本地环境串联 Jenkins、Gitea、Harbor、Docker 和 Zabbix 的 DevOps 实验',
-    description: '这个实验用于理解从代码托管、自动构建、服务部署到基础监控的完整流程，并通过多语言 Web 服务验证流水线可用性。',
-    highlights: ['Jenkins 自动部署', 'Gitea + Harbor 本地实验', 'Zabbix 可用性监控'],
-    tags: ['Jenkins', 'Gitea', 'Harbor', 'Docker', 'Zabbix', 'WSL2'],
-    status: 'Local Lab',
-    link: null,
-    github: null,
-  },
-  {
-    id: 'fooocus-ui-patch',
-    type: 'AI 工具优化 / UI 本地化',
-    title: 'Fooocus 中文本地 UI 补丁',
-    subtitle: '围绕 Fooocus 做中文 UI、预设和本地启动体验优化的轻量补丁项目',
-    description: '这个项目把本地 AI 绘图工具的使用体验做得更适合中文用户，包括界面文字、预设入口、启动脚本和本地说明文档，重点是低侵入、可回滚、方便维护。',
-    highlights: ['中文 UI 补丁', '本地预设与启动脚本', '非侵入式改造与回滚说明'],
-    tags: ['Fooocus', 'SDXL', 'JavaScript', 'UI Patch', 'Markdown'],
-    status: 'Open Source',
-    link: null,
-    github: 'https://github.com/SUCHA-main/fooocus-zh-local-patch',
-  },
-  {
-    id: 'luanhua-site',
-    type: '个人网站 / 作品集入口',
-    title: '乱花 luanhua-site',
-    subtitle: '用 Astro 构建的个人网站，用来整理技术项目、学习路线和成长记录',
-    description: '这个网站是个人技术成长的展示入口，重点不是炫技，而是把项目、笔记和方向整理成一个可持续迭代的空间。',
-    highlights: ['Astro 静态站点', '原生 CSS 响应式布局', '轻量动画与作品集结构'],
-    tags: ['Astro', 'TypeScript', 'CSS', 'Static Site'],
-    status: 'In Progress',
-    link: '/',
-    github: null,
-  },
-];
 ---
 
-<BaseLayout title="项目作品 | 乱花" description="乱花的项目作品记录，包含 AI 应用、全栈开发、DevOps 实验等方向">
+<BaseLayout
+  title="项目作品 | 乱花 Personal Lab"
+  description="查看乱花的重点公开项目与其他技术实践，涵盖 AI 摘要、Provider Gateway、Go WebSocket、全栈 MVP、手势识别与 DevOps。"
+>
   <section class="section projects-section">
     <div class="section-head">
       <h1>项目作品</h1>
-      <p>从全栈开发、AI 应用到 DevOps 实验，这些项目记录了我的技术实践和学习路线。</p>
+      <p>优先展示已经公开、边界清晰的完整 MVP；其他练习保留真实状态和当前限制。</p>
     </div>
-    <div class="projects-grid">
-      {
-        projects.map((project) => (
-          <article class="project-detail-card" id={project.id}>
-            <div class="project-detail-header">
-              <span class="project-type-badge">{project.type}</span>
-              <span class="project-status-badge">{project.status}</span>
-            </div>
-            <h2>{project.title}</h2>
-            <p class="project-detail-subtitle">{project.subtitle}</p>
-            <p class="project-detail-desc">{project.description}</p>
-            <div class="project-detail-highlights">
-              <h4>关键亮点</h4>
-              <ul>
-                {project.highlights.map((item) => (
-                  <li>{item}</li>
-                ))}
-              </ul>
-            </div>
-            <div class="project-detail-tags">
-              {project.tags.map((tag) => <span class="tag">{tag}</span>)}
-            </div>
-            <div class="project-detail-actions">
-              {project.link && (
-                <a href={project.link} class="project-action-btn primary">
-                  {project.link === '/' ? '当前网站' : '查看详情'}
-                </a>
-              )}
-              {project.github && (
-                <a href={project.github} class="project-action-btn secondary" target="_blank" rel="noopener noreferrer" aria-label={`${project.title} GitHub 仓库`}>
-                  GitHub ↗
-                </a>
-              )}
-              {!project.link && !project.github && (
-                <span class="project-action-btn disabled">详情整理中</span>
-              )}
-            </div>
-          </article>
-        ))
-      }
-    </div>
+
+    <section class="project-group" aria-labelledby="featured-project-group">
+      <div class="project-group-heading">
+        <div>
+          <span>Featured</span>
+          <h2 id="featured-project-group">重点项目</h2>
+        </div>
+        <p>四个已经完成仓库整理、适合作为个人作品入口的公开项目。</p>
+      </div>
+      <div class="projects-grid featured-projects-grid">
+        {featuredProjects.map((project) => <ProjectCard project={project} />)}
+      </div>
+    </section>
+
+    <section class="project-group secondary-project-group" aria-labelledby="other-project-group">
+      <div class="project-group-heading">
+        <div>
+          <span>Practice</span>
+          <h2 id="other-project-group">其他实践</h2>
+        </div>
+        <p>开源补丁、计算机视觉、本地 DevOps 实验和当前网站本身。</p>
+      </div>
+      <div class="projects-grid secondary-projects-grid">
+        {otherProjects.map((project) => <ProjectCard project={project} />)}
+      </div>
+    </section>
   </section>
 </BaseLayout>

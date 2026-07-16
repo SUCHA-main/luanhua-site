@@ -13,7 +13,7 @@
 | 页面 | 说明 |
 |------|------|
 | 首页 | Hero 区、当前关注方向、精选项目展示 |
-| 项目页 | 展示 Go WebSocket Chatroom、AI WeChat Digest MVP、LabelHub AI MVP、CI/CD Lab、Fooocus 中文本地 UI 补丁、luanhua-site |
+| 项目页 | 区分重点项目与其他实践，统一展示公开仓库、真实边界和当前限制 |
 | 笔记页 | 整理项目复盘、AI 应用笔记、DevOps 实验记录、AIoT / 物联网准备 |
 | 关于页 | 介绍当前学习方向、项目经历、学习方式和下一阶段计划 |
 
@@ -101,6 +101,7 @@ npx astro check
 ```text
 src/
 ├── components/   # Astro 组件
+├── data/         # 带 TypeScript 类型的统一项目数据
 ├── layouts/      # 页面布局
 ├── pages/        # 路由页面（文件即路由）
 ├── styles/       # 全局样式
@@ -115,7 +116,9 @@ public/
 - ✅ 已完成首页、项目页、笔记页、关于页基础优化
 - ✅ 已完成本地构建验证
 - ✅ 已添加基础响应式适配
-- ✅ 已添加项目 GitHub 链接（Go WebSocket Chatroom、LabelHub AI MVP、Fooocus）
+- ✅ 首页、项目页和关于页共同读取 `src/data/projects.ts`
+- ✅ 已补全公开项目的真实 GitHub 链接和四张安全项目封面
+- ✅ 已补充基础 SEO、favicon、键盘焦点和 reduced-motion 支持
 - ✅ 已部署到 Vercel：https://luanhua-site.vercel.app/
 - ⚠️ Notes 内容仍以待整理入口为主
 - ⚠️ 后续会继续补充项目详情和真实笔记内容

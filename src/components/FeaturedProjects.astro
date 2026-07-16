@@ -1,79 +1,20 @@
 ---
-const projects = [
-  {
-    type: 'Go 后端 / 实时通信',
-    title: 'Go WebSocket Chatroom',
-    subtitle: '用 Go 搭建的实时聊天室，练习 WebSocket、登录状态和本地 AI 助手接入',
-    description: '这是一个偏后端实践的聊天项目，围绕注册登录、会话状态、消息广播、在线人数、历史消息和轻量聊天体验展开，并尝试接入本地 Ollama AI 助手。',
-    highlights: ['WebSocket 实时通信', '登录会话与消息广播', '本地 Ollama AI 助手'],
-    tags: ['Go', 'WebSocket', 'Ollama', 'HTML', 'CSS', 'JavaScript'],
-    status: 'Open Source',
-    link: '/projects#go-websocket-chatroom',
-    github: 'https://github.com/SUCHA-main/go-websocket-chatroom',
-  },
-  {
-    type: 'AI 应用 / 信息整理',
-    title: 'AI WeChat Digest MVP',
-    subtitle: '把 RSS 抓取、AI 总结、晚报生成和推送出口串起来的信息整理 MVP',
-    description: '这个项目用于练习 AI 应用从数据源到结果输出的完整流程：抓取文章、去重入库、调用 AI/Mock 总结、按偏好判断重要性，并生成每日晚报。',
-    highlights: ['RSS 数据源管理', 'AI / Mock 总结流程', '每日晚报与推送框架'],
-    tags: ['Node.js', 'Express', 'SQLite', 'RSS', 'AI Provider', 'Ollama'],
-    status: 'MVP',
-    link: '/projects#ai-wechat-digest',
-    github: null,
-  },
-  {
-    type: '全栈 MVP / AI 辅助标注',
-    title: 'LabelHub AI MVP',
-    subtitle: '一个 AI 辅助数据标注平台 MVP，用来练习前后端分离和任务流转',
-    description: '这个项目围绕标注任务、动态表单、模拟 AI 审核和演示型工作流展开，重点不是做成完整平台，而是展示 AI + 全栈产品原型的搭建能力。',
-    highlights: ['前后端分离', 'Mock AI Review', 'Docker 演示支持'],
-    tags: ['React', 'Vite', 'Node.js', 'Express', 'Docker', 'AI'],
-    status: 'Demo Ready',
-    link: '/projects#labelhub-ai',
-    github: 'https://github.com/SUCHA-main/labelhub-ai-mvp',
-  },
-];
+import { featuredProjects } from '../data/projects';
+import ProjectCard from './ProjectCard.astro';
 ---
 
-<section class="content-section featured-section" data-reveal>
+<section class="content-section featured-section" aria-labelledby="featured-projects-title" data-reveal>
   <div class="section-heading soft-heading" data-reveal>
     <span>Projects</span>
-    <h2>精选项目</h2>
-    <p>从全栈开发、AI 应用到实时通信，这些项目记录了我的技术实践和学习路线。</p>
+    <h2 id="featured-projects-title">精选项目</h2>
+    <p>优先展示边界清晰、已经公开并完成基础整理的四个项目。</p>
   </div>
 
   <div class="project-card-grid">
-    {
-      projects.map((project) => (
-        <article class="soft-card project-card" data-reveal>
-          <div class="project-card-header">
-            <span class="project-type-badge">{project.type}</span>
-            <span class="project-status-badge">{project.status}</span>
-          </div>
-          <h3>{project.title}</h3>
-          <p class="project-subtitle">{project.subtitle}</p>
-          <p class="project-desc">{project.description}</p>
-          <ul class="project-highlights">
-            {project.highlights.map((item) => (
-              <li>{item}</li>
-            ))}
-          </ul>
-          <div class="pill-list">
-            {project.tags.map((tag) => <span>{tag}</span>)}
-          </div>
-          <div class="project-card-actions">
-            <a href={project.link} class="project-link">
-              查看详情 →
-            </a>
-            {project.github && (
-              <a href={project.github} class="project-link github-link" target="_blank" rel="noopener noreferrer" aria-label={`${project.title} GitHub 仓库`}>
-                GitHub ↗
-              </a>
-            )}
-          </div>
-        </article>
-      ))
-    }
+    {featuredProjects.map((project) => <ProjectCard project={project} variant="featured" />)}
+  </div>
+
+  <div class="featured-projects-footer" data-reveal>
+    <a href="/projects" class="project-action-btn secondary">查看全部项目 →</a>
   </div>
 </section>

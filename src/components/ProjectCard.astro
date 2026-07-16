@@ -1,0 +1,99 @@
+---
+import type { PortfolioProject } from '../data/projects';
+
+interface Props {
+  project: PortfolioProject;
+  variant?: 'featured' | 'detail';
+}
+
+const { project, variant = 'detail' } = Astro.props;
+const isFeatured = variant === 'featured';
+---
+
+<article
+  class:list={[
+    isFeatured ? 'soft-card project-card' : 'project-detail-card',
+    { 'has-project-image': Boolean(project.image) },
+  ]}
+  id={isFeatured ? undefined : project.id}
+  data-reveal={isFeatured ? true : undefined}
+>
+  {
+    project.image && (
+      <div class="project-card-media">
+        <img
+          src={project.image.src}
+          alt={project.image.alt}
+          width={project.image.width}
+          height={project.image.height}
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+    )
+  }
+
+  <div class:list={[isFeatured ? 'project-card-header' : 'project-detail-header']}>
+    <span class="project-type-badge">{project.type}</span>
+    <span class="project-status-badge">{project.status}</span>
+  </div>
+
+  <h3>{project.title}</h3>
+  <p class:list={[isFeatured ? 'project-subtitle' : 'project-detail-subtitle']}>{project.subtitle}</p>
+  <p class:list={[isFeatured ? 'project-desc' : 'project-detail-desc']}>{project.description}</p>
+
+  <div class={isFeatured ? undefined : 'project-detail-highlights'}>
+    {!isFeatured && <h4>关键亮点</h4>}
+    <ul class={isFeatured ? 'project-highlights' : undefined}>
+      {project.highlights.map((item) => <li>{item}</li>)}
+    </ul>
+  </div>
+
+  {
+    !isFeatured && (
+      <div class="project-limitations">
+        <h4>当前边界</h4>
+        <ul>
+          {project.limitations.map((item) => <li>{item}</li>)}
+        </ul>
+      </div>
+    )
+  }
+
+  <div class={isFeatured ? 'pill-list' : 'project-detail-tags'}>
+    {project.tags.map((tag) => <span class={isFeatured ? undefined : 'tag'}>{tag}</span>)}
+  </div>
+
+  <div class:list={[isFeatured ? 'project-card-actions' : 'project-detail-actions']}>
+    {isFeatured && (
+      <a href={`/projects#${project.id}`} class="project-link">
+        查看详情 →
+      </a>
+    )}
+    {
+      project.demo && (
+        <a href={project.demo} class={isFeatured ? 'project-link' : 'project-action-btn primary'}>
+          {project.demo === '/' ? '当前网站' : '在线演示'}
+        </a>
+      )
+    }
+    {
+      project.github && (
+        <a
+          href={project.github}
+          class={isFeatured ? 'project-link github-link' : 'project-action-btn secondary'}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`${project.title} GitHub 仓库（新窗口打开）`}
+        >
+          GitHub ↗
+        </a>
+      )
+    }
+    {
+      !isFeatured && !project.demo && !project.github && (
+        <span class="project-action-btn disabled">本地实验</span>
+      )
+    }
+  </div>
+</article>

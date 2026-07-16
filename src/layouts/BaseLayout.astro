@@ -10,8 +10,8 @@ interface Props {
 }
 
 const {
-  title = '乱花',
-  description = '持续记录技术学习、项目实践与个人成长',
+  title = '乱花 | AI 应用、全栈与 DevOps 项目',
+  description = '乱花的个人技术作品集，记录 AI 应用、全栈开发、实时通信与 DevOps 实验。',
   navVariant = 'default',
   pageClass = '',
 } = Astro.props;
@@ -24,19 +24,37 @@ const {
     <meta name="description" content={description} />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="generator" content={Astro.generator} />
+    <meta name="theme-color" content="#050507" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="zh_CN" />
+    <meta property="og:site_name" content="乱花 Personal Lab" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <title>{title}</title>
   </head>
   <body class={pageClass}>
+    <a class="skip-link" href="#main-content">跳到主要内容</a>
     <div class="site-shell">
       <Navbar variant={navVariant} />
 
-      <main>
+      <main id="main-content">
         <slot />
       </main>
 
       <footer class="site-footer">
         <span>© 2026 乱花</span>
-        <span>Built with Astro</span>
+        <a
+          href="https://github.com/SUCHA-main/luanhua-site"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="luanhua-site GitHub 仓库（新窗口打开）"
+        >
+          Built with Astro · GitHub ↗
+        </a>
       </footer>
     </div>
   </body>
