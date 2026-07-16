@@ -14,7 +14,7 @@
 |------|------|
 | 首页 | Hero 区、当前关注方向、精选项目展示 |
 | 项目页 | 区分重点项目与其他实践，统一展示公开仓库、真实边界和当前限制 |
-| 笔记页 | 整理项目复盘、AI 应用笔记、DevOps 实验记录、AIoT / 物联网准备 |
+| 笔记页 | 基于 Astro Content Collections 的真实项目复盘列表与独立文章页 |
 | 关于页 | 介绍当前学习方向、项目经历、学习方式和下一阶段计划 |
 
 ## 在线访问
@@ -101,6 +101,7 @@ npx astro check
 ```text
 src/
 ├── components/   # Astro 组件
+├── content/      # Markdown 技术笔记正文
 ├── data/         # 带 TypeScript 类型的统一项目数据
 ├── layouts/      # 页面布局
 ├── pages/        # 路由页面（文件即路由）

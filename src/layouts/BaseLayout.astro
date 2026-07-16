@@ -7,6 +7,9 @@ interface Props {
   description?: string;
   navVariant?: 'default' | 'floating';
   pageClass?: string;
+  ogType?: 'website' | 'article';
+  publishedTime?: string;
+  tags?: string[];
 }
 
 const {
@@ -14,6 +17,9 @@ const {
   description = '乱花的个人技术作品集，记录 AI 应用、全栈开发、实时通信与 DevOps 实验。',
   navVariant = 'default',
   pageClass = '',
+  ogType = 'website',
+  publishedTime,
+  tags = [],
 } = Astro.props;
 ---
 
@@ -25,7 +31,7 @@ const {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="generator" content={Astro.generator} />
     <meta name="theme-color" content="#050507" />
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
     <meta property="og:locale" content="zh_CN" />
     <meta property="og:site_name" content="乱花 Personal Lab" />
     <meta property="og:title" content={title} />
@@ -33,6 +39,8 @@ const {
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
+    {publishedTime && <meta property="article:published_time" content={publishedTime} />}
+    {tags.map((tag) => <meta property="article:tag" content={tag} />)}
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <title>{title}</title>
   </head>

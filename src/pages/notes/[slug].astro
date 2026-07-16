@@ -1,0 +1,75 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { getCollection, render } from 'astro:content';
+import { orderedProjects } from '../../data/projects';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const notes = await getCollection('notes', ({ data }) => !data.draft);
+
+  return notes.map((note) => ({
+    params: { slug: note.id },
+    props: { note },
+  }));
+}
+
+interface Props {
+  note: CollectionEntry<'notes'>;
+}
+
+const { note } = Astro.props;
+const { Content } = await render(note);
+const project = orderedProjects.find((item) => item.id === note.data.projectId);
+const publishedAt = note.data.publishedAt.toISOString();
+const displayDate = new Intl.DateTimeFormat('zh-CN', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+}).format(note.data.publishedAt);
+---
+
+<BaseLayout
+  title={`${note.data.title} | 乱花技术笔记`}
+  description={note.data.description}
+  pageClass="note-article-page"
+  ogType="article"
+  publishedTime={publishedAt}
+  tags={note.data.tags}
+>
+  <article class="note-article-shell">
+    <nav class="note-breadcrumb" aria-label="文章路径">
+      <a href="/notes">技术笔记</a>
+      <span aria-hidden="true">/</span>
+      <span>{note.data.category}</span>
+    </nav>
+
+    <header class="note-article-header">
+      <span class="note-article-category">{note.data.category}</span>
+      <h1>{note.data.title}</h1>
+      <p>{note.data.description}</p>
+      <div class="note-article-meta">
+        <time datetime={publishedAt}>{displayDate}</time>
+        <span>{note.data.tags.length} 个标签</span>
+      </div>
+      <div class="note-article-tags" aria-label="文章标签">
+        {note.data.tags.map((tag) => <span>{tag}</span>)}
+      </div>
+    </header>
+
+    <div class="note-article-prose">
+      <Content />
+    </div>
+
+    <footer class="note-article-footer">
+      <div>
+        <span>Related Project</span>
+        <h2>{project?.title ?? 'AI WeChat Digest MVP'}</h2>
+        <p>{project?.subtitle ?? '从 RSS 到结构化每日晚报的 Mock-first AI 应用 MVP。'}</p>
+      </div>
+      <div class="note-article-actions">
+        <a href={`/projects#${note.data.projectId}`} class="project-action-btn primary">返回项目页</a>
+        <a href="/notes" class="project-action-btn secondary">全部笔记</a>
+      </div>
+    </footer>
+  </article>
+</BaseLayout>

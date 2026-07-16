@@ -1,149 +1,108 @@
 ---
+import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
-const categories = [
-  {
-    title: '项目复盘',
-    desc: '记录项目从最小可运行版本到逐步打磨的过程，包括功能取舍、文案调整、演示准备和下一步计划。',
-    related: 'Go WebSocket Chatroom / AI WeChat Digest / LabelHub AI / 个人网站改造',
-    status: '持续整理',
-  },
-  {
-    title: 'AI 应用笔记',
-    desc: '整理 AI 总结、Mock AI Review、本地 Ollama 接入、AI Provider 配置等实践记录。',
-    related: 'AI WeChat Digest MVP / LabelHub AI MVP / WebSocket Chatroom AI 助手',
-    status: '持续整理',
-  },
-  {
-    title: 'DevOps 实验记录',
-    desc: '记录 Jenkins、Gitea、Harbor、Docker、Zabbix 等本地实验环境搭建、问题排查和验证过程。',
-    related: 'CI/CD Lab / 多语言 Web 自动部署 / Zabbix 监控',
-    status: '本地实验',
-  },
-  {
-    title: 'AIoT / 物联网准备',
-    desc: '记录 ESP32、MQTT、传感器、Web Dashboard 等方向的准备内容和后续尝试。',
-    related: '下一阶段准备尝试 / 低成本可复刻小项目',
-    status: '准备中',
-  },
-];
+const notes = (await getCollection('notes', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf(),
+);
 
-const pendingNotes = [
-  {
-    title: 'Go WebSocket Chatroom：从登录到实时通信',
-    category: '项目复盘',
-    desc: '整理聊天室项目里注册登录、会话状态、消息广播和前端交互的实现过程。',
-    status: '待整理',
-  },
-  {
-    title: 'AI WeChat Digest MVP：RSS 到每日晚报',
-    category: 'AI 应用',
-    desc: '记录从数据源抓取、文章去重、AI/Mock 总结到晚报生成的流程。',
-    status: '待整理',
-  },
-  {
-    title: 'LabelHub AI MVP：一个 AI 标注平台原型',
-    category: '项目复盘',
-    desc: '复盘动态表单、任务流转、Mock AI Review 和演示包装的设计取舍。',
-    status: '待整理',
-  },
-  {
-    title: '本地 CI/CD Lab：从代码提交到服务部署',
-    category: 'DevOps 实验',
-    desc: '整理 Jenkins、Gitea、Harbor、Docker 串起来时遇到的问题和验证方法。',
-    status: '待整理',
-  },
-  {
-    title: 'Zabbix 监控：给本地服务加可用性检查',
-    category: 'DevOps 实验',
-    desc: '记录 Jenkins、Gitea、Harbor 等服务的 Web 场景监控配置思路。',
-    status: '待整理',
-  },
-  {
-    title: 'ESP32 + MQTT + Web Dashboard 准备路线',
-    category: 'AIoT / 物联网',
-    desc: '整理一个低成本物联网小项目的准备路径，后续再逐步实现。',
-    status: '准备中',
-  },
-];
+const categories = [...new Set(notes.map((note) => note.data.category))];
+const formatDate = (date: Date) =>
+  new Intl.DateTimeFormat('zh-CN', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  }).format(date);
 
 const principles = [
   {
-    title: '先记录真实过程',
-    desc: '优先写真实遇到的问题和解决步骤，而不是为了显得完整而补概念。',
+    title: '只写已经发生的事',
+    desc: '文章从真实代码、检查记录和已完成的项目整理中提炼，不补写不存在的用户反馈或线上效果。',
   },
   {
-    title: '先项目，后总结',
-    desc: '笔记从已经跑通过的小项目里长出来，而不是凭空写教程。',
+    title: '把边界写进正文',
+    desc: '实现、验证、未测试和后续计划分别说明，让项目能力保持可核对。',
   },
   {
-    title: '保留下一步',
-    desc: '每篇笔记都尽量留下后续改进方向，方便项目持续迭代。',
+    title: '内容与项目互相连接',
+    desc: '每篇复盘都保留项目页入口，后续可以继续补充同一项目的部署、测试和迭代记录。',
   },
 ];
 ---
 
-<BaseLayout title="技术笔记 | 乱花" description="乱花的技术笔记，记录项目实践、工具配置、踩坑复盘和阶段性学习整理">
+<BaseLayout
+  title="技术笔记 | 乱花 Personal Lab"
+  description="乱花的真实项目复盘与技术笔记，记录实现路径、安全边界、验证结果和下一步计划。"
+>
   <section class="section notes-section">
     <div class="section-head">
       <h1>技术笔记</h1>
-      <p class="notes-tagline">记录项目实践、工具配置、踩坑复盘和阶段性学习整理。</p>
+      <p class="notes-tagline">从已经完成的项目里整理实现路径、取舍和下一步。</p>
     </div>
 
-    <div class="notes-intro">
+    <div class="notes-intro notes-system-intro">
+      <div>
+        <span>Published</span>
+        <strong>{notes.length}</strong>
+        <p>篇真实项目复盘</p>
+      </div>
+      <div>
+        <span>Categories</span>
+        <strong>{categories.length}</strong>
+        <p>{categories.join(' / ') || '持续整理'}</p>
+      </div>
       <p>
-        这里不会一次性写成完整教程合集，而是把每个项目推进过程中真正遇到的问题、解决过程和复盘慢慢整理出来。
+        这里只展示已经完成并能从项目代码与检查记录中核对的文章。实现、验证、未测试项和下一步会分别说明。
       </p>
     </div>
 
-    <div class="notes-categories">
-      <h2 class="notes-section-title">笔记分类</h2>
+    <section class="notes-published" aria-labelledby="published-notes-title">
+      <div class="notes-section-heading">
+        <div>
+          <span>Articles</span>
+          <h2 id="published-notes-title">已发布</h2>
+        </div>
+        <p>按发布日期排序，元数据和正文在构建阶段完成校验。</p>
+      </div>
+
+      <div class="note-entry-list">
+        {
+          notes.map((note) => (
+            <article class="note-entry-card">
+              <div class="note-entry-meta">
+                <span>{note.data.category}</span>
+                <time datetime={note.data.publishedAt.toISOString()}>{formatDate(note.data.publishedAt)}</time>
+              </div>
+              <h2>
+                <a href={`/notes/${note.id}`}>{note.data.title}</a>
+              </h2>
+              <p>{note.data.description}</p>
+              <div class="note-entry-footer">
+                <div class="note-entry-tags" aria-label={`${note.data.title} 标签`}>
+                  {note.data.tags.map((tag) => <span>{tag}</span>)}
+                </div>
+                <a href={`/notes/${note.id}`} class="project-link" aria-label={`阅读 ${note.data.title}`}>
+                  阅读复盘 →
+                </a>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="notes-principles" aria-labelledby="notes-principles-title">
+      <h2 class="notes-section-title" id="notes-principles-title">写作原则</h2>
       <div class="notes-grid">
-        {categories.map((cat) => (
-          <article class="note-category-card">
-            <h3>{cat.title}</h3>
-            <p class="note-category-desc">{cat.desc}</p>
-            <div class="note-category-meta">
-              <span class="note-category-related">关联：{cat.related}</span>
-              <span class="note-category-status">{cat.status}</span>
-            </div>
-          </article>
-        ))}
+        {
+          principles.map((item) => (
+            <article class="note-principle-card">
+              <h3>{item.title}</h3>
+              <p>{item.desc}</p>
+            </article>
+          ))
+        }
       </div>
-    </div>
-
-    <div class="notes-pending">
-      <h2 class="notes-section-title">近期准备整理</h2>
-      <div class="notes-list">
-        {pendingNotes.map((note) => (
-          <article class="note-item">
-            <div class="note-item-header">
-              <span class="note-tag">{note.category}</span>
-              <span class="note-status">{note.status}</span>
-            </div>
-            <h3>{note.title}</h3>
-            <p>{note.desc}</p>
-          </article>
-        ))}
-      </div>
-    </div>
-
-    <div class="notes-principles">
-      <h2 class="notes-section-title">写作原则</h2>
-      <div class="notes-grid">
-        {principles.map((item) => (
-          <article class="note-principle-card">
-            <h3>{item.title}</h3>
-            <p>{item.desc}</p>
-          </article>
-        ))}
-      </div>
-    </div>
-
-    <div class="notes-cta">
-      <h2>先看项目，再看笔记</h2>
-      <p>如果想了解这些笔记对应的实践，可以先从项目作品页开始。</p>
-      <a href="/projects" class="notes-cta-btn">查看项目作品 →</a>
-    </div>
+    </section>
   </section>
 </BaseLayout>
