@@ -107,6 +107,12 @@ export const projects: PortfolioProject[] = [
       width: 1440,
       height: 983,
     },
+    notes: [
+      {
+        title: 'Go WebSocket Chatroom：从 HTTP 登录到实时消息广播',
+        href: '/notes/go-websocket-chatroom-http-login-to-realtime-broadcast',
+      },
+    ],
     featured: true,
     order: 3,
     limitations: ['定位为学习与本地演示项目', '没有公开在线 Demo', '不宣称生产级认证或消息可靠性'],
