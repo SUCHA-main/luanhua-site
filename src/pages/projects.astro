@@ -1,13 +1,13 @@
 ---
 import ProjectCard from '../components/ProjectCard.astro';
 import { siteConfig } from '../config/site';
-import { featuredProjects, otherProjects } from '../data/projects';
+import { otherProjects, showcaseProjects } from '../data/projects';
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
 <BaseLayout
   title={`项目作品 | ${siteConfig.siteName}`}
-  description="查看乱花的重点公开项目与其他技术实践，涵盖 AI 摘要、Provider Gateway、Go WebSocket、全栈 MVP、手势识别与 DevOps。"
+  description="查看乱花的重点公开项目与其他技术实践，涵盖 AI 摘要、Provider Gateway、Go WebSocket、全栈 MVP、适老化产品复盘、手势识别与 DevOps。"
 >
   <section class="section projects-section">
     <div class="section-head">
@@ -21,10 +21,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           <span>Featured</span>
           <h2 id="featured-project-group">重点项目</h2>
         </div>
-        <p>四个已经完成仓库整理、适合作为个人作品入口的公开项目。</p>
+        <p>五个已经完成仓库整理、适合作为个人作品或产品复盘入口的公开项目。</p>
       </div>
       <div class="projects-grid featured-projects-grid">
-        {featuredProjects.map((project) => <ProjectCard project={project} />)}
+        {showcaseProjects.map((project) => <ProjectCard project={project} />)}
       </div>
     </section>
 

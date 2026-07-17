@@ -26,6 +26,7 @@ export interface PortfolioProject {
   image?: ProjectImage;
   notes?: ProjectNote[];
   featured: boolean;
+  showcase?: boolean;
   order: number;
   limitations: string[];
 }
@@ -146,6 +147,40 @@ export const projects: PortfolioProject[] = [
     limitations: ['AI Review 是规则驱动 Mock', 'Demo 登录不是真实认证', 'JSON 文件持久化只适合本地演示'],
   },
   {
+    id: 'yaoshiling',
+    title: '药时铃',
+    type: '适老化原型 / 产品复盘',
+    subtitle: '从 React Web MVP 演进到微信原生小程序，并在医疗与产品边界前主动停止扩张',
+    description:
+      '一个面向居家老人和异地子女的用药提醒与家庭协同原型。后端使用 Node.js、Express、Prisma 和 SQLite，验证今日用药、确认记录、药箱、手动漏服检查与家庭协同流程；现保留为技术实现、适老化交互和产品判断案例。',
+    highlights: ['Web MVP 到微信原生小程序', '今日用药、药箱与确认记录', '医疗边界与产品停止判断'],
+    tags: ['WeChat Mini Program', 'Node.js', 'Express', 'Prisma', 'SQLite', 'Accessibility', 'Product Validation'],
+    status: 'Archived MVP',
+    github: 'https://github.com/SUCHA-main/yaoshiling',
+    image: {
+      src: '/projects/yaoshiling/cover.png',
+      alt: '药时铃 Web MVP 首页及其医疗与产品边界说明',
+      width: 1895,
+      height: 1203,
+    },
+    notes: [
+      {
+        title: '药时铃：从 Web 原型到微信小程序，以及为什么停止产品化扩张',
+        href: '/notes/yaoshiling-from-web-mvp-to-miniprogram-and-stopping-product-expansion',
+      },
+    ],
+    featured: false,
+    showcase: true,
+    order: 5,
+    limitations: [
+      '不提供诊断、问诊、处方、剂量或个体化用药建议，演示药品数据不是正式药品信息服务',
+      '扫码仅查询演示编号；漏服检查需手动触发，不是真实消息推送',
+      '确认记录只代表点击确认，不证明真实服药',
+      '小程序没有完整子女计划管理；固定用户和 Demo Token 不是真实认证体系',
+      '没有硬件设备，项目已停止产品化扩张',
+    ],
+  },
+  {
     id: 'sign-language-demo',
     title: 'Sign Language Demo',
     type: '计算机视觉 / 手势识别',
@@ -157,7 +192,7 @@ export const projects: PortfolioProject[] = [
     status: 'Open Source',
     github: 'https://github.com/SUCHA-main/sign-language-demo',
     featured: false,
-    order: 5,
+    order: 6,
     limitations: ['只识别五类自定义手势', '模型和个人采集数据不进入公开仓库', '历史本地准确率不是正式评测结果'],
   },
   {
@@ -172,7 +207,7 @@ export const projects: PortfolioProject[] = [
     status: 'Open Source',
     github: 'https://github.com/SUCHA-main/fooocus-zh-local-patch',
     featured: false,
-    order: 6,
+    order: 7,
     limitations: ['非官方 Fooocus 补丁', '依赖本地 Fooocus 环境与模型', '仓库不包含模型文件'],
   },
   {
@@ -186,7 +221,7 @@ export const projects: PortfolioProject[] = [
     tags: ['Jenkins', 'Gitea', 'Harbor', 'Docker', 'Zabbix'],
     status: 'Local Lab',
     featured: false,
-    order: 7,
+    order: 8,
     limitations: ['当前没有独立公开仓库', '依赖本地基础设施', '不作为可直接复用的生产部署方案'],
   },
   {
@@ -202,12 +237,17 @@ export const projects: PortfolioProject[] = [
     github: 'https://github.com/SUCHA-main/luanhua-site',
     demo: '/',
     featured: false,
-    order: 8,
+    order: 9,
     limitations: ['站点内容仍持续更新', '技术笔记尚未全部整理为正式文章'],
   },
 ];
 
 export const orderedProjects = [...projects].sort((a, b) => a.order - b.order);
 export const featuredProjects = orderedProjects.filter((project) => project.featured);
-export const otherProjects = orderedProjects.filter((project) => !project.featured);
+export const showcaseProjects = orderedProjects.filter(
+  (project) => project.featured || project.showcase,
+);
+export const otherProjects = orderedProjects.filter(
+  (project) => !project.featured && !project.showcase,
+);
 export const representativeProjects = featuredProjects.slice(0, 3);
